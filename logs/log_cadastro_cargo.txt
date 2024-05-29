@@ -1,0 +1,10 @@
+main.dart.js:83921 passou continue
+main.dart.js:83921 getData
+main.dart.js:83921 0
+web.tecnopontonuvem.com/:1 Access to XMLHttpRequest at 'https://webapiponto.tecnopontonuvem.com:8899/oauth/token' from origin 'https://web.tecnopontonuvem.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+main.dart.js:83921 Erro durante a requisição tentativa 1
+webapiponto.tecnopontonuvem.com:8899/oauth/token:1 
+        
+        
+       Failed to load resource: net::ERR_FAILED
+main.dart.js:83921 Cadastrar - Salvou o Cargo:33

@@ -1,0 +1,12 @@
+main.dart.js:83921 https://webapiponto.tecnopontonuvem.com:8899/funcionario_/1
+main.dart.js:83921 Salvou o(s) registroFuncionario(s)
+2main.dart.js:83921 ver aqui no objeto func: 18171307000110
+main.dart.js:83921 Salvou o(s) horario(s)
+main.dart.js:83921 Salvou o(s) Cargo(s)
+main.dart.js:83921 Salvou o(s) Departamento(s)
+web.tecnopontonuvem.com/:1 Access to XMLHttpRequest at 'https://webapiponto.tecnopontonuvem.com:8899/horario_?page=1' from origin 'https://web.tecnopontonuvem.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+main.dart.js:83921 Erro durante a requisição tentativa 1
+webapiponto.tecnopontonuvem.com:8899/horario_?page=1:1 
+        
+        
+       Failed to load resource: net::ERR_FAILED
