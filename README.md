@@ -72,8 +72,11 @@ Este projeto requer as seguintes dependências, que podem ser instaladas usando 
     pip install -r requirements.txt
 
 
-Isso garantirá que todas as bibliotecas necessárias estejam presentes e no nível correto de versão para o funcionamento adequado do projeto.
+Isso garantirá que todas as bibliotecas necessárias estejam presentes e no nível correto de versão para o funcionamento adequado do projeto. Tabmém é possível instalar as bibliotecas através do comando :
 
+  
+
+    pip install pyautogui pyperclip opencv-python
   
 
 ## Funcionalidades
@@ -106,20 +109,7 @@ Cada funcionalidade é implementada em um arquivo Python separado, permitindo mo
 
 Para executar o projeto, basta iniciar o arquivo `main.py`. Certifique-se de ter todas as dependências necessárias instaladas e que os arquivos de captura de tela estejam acessíveis no diretório correto.
 
-  
-
-## Contribuição
-
-  
-
-Contribuições são bem-vindas! Sinta-se à vontade para propor melhorias, corrigir problemas ou adicionar novas funcionalidades.
-
-  
 
 ## Licença
 
-  
-
 Este projeto é distribuído sob a licença [MIT](https://opensource.org/licenses/MIT).
-
-  

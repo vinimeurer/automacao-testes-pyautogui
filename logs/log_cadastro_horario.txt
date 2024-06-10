@@ -1,9 +1,0 @@
-main.dart.js:83921 Cadastrar - Salvou o Horario:102
-main.dart.js:83921 Cadastrar - Salvou o CargaHoraria:98
-web.tecnopontonuvem.com/:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
-webchat.builder4bots.com.br/:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
-main.dart.js:83921 Cadastrar - Salvou o Política:53
-main.dart.js:83921 updateHorario - retorno - 200
-main.dart.js:83921 Horario updated!
-main.dart.js:83921 Editar - Salvou o Horario:102
-main.dart.js:83921 Cadastrar - Salvou o PoliticaHorario:54

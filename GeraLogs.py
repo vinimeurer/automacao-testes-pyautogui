@@ -8,6 +8,10 @@ class GeraLogs:
 
         # atalho abrir console do navegador (Chrome)
         pyautogui.hotkey('ctrl', 'shift', 'j')
+        time.sleep(1)
+        pyautogui.hotkey('win','up')
+        time.sleep(1)
+        pyautogui.click(810,115)
         time.sleep(2)
 
         # Seleciona todo o texto
@@ -31,6 +35,8 @@ class GeraLogs:
             file.write(text)
 
     def limpar_e_fechar():
+        pyautogui.hotkey('win','down')
+        time.sleep(1)
         pyautogui.hotkey('ctrl', 'l')
         pyautogui.hotkey('alt', 'f4')
         
