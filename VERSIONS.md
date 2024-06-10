@@ -1,4 +1,15 @@
-# Notas de Versão - Automatização de Cadastro de Cargos
+# Notas de Versão - Projeto de Automação
+
+## [Versão 1.0.1] - 2024-06-10
+
+**Adicionado**
+- Correção de um bug no direcionamento de imagens 
+
+**Alterado**
+- N/A
+**Removido**
+- N/A
+
 
 ## [Versão 1.0.0] - 2024-06-10
 
