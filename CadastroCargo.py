@@ -7,6 +7,7 @@ class CadastroCargo:
     def __init__(self):
         self.caminhoScreenshot = '.\\screenshots\\CadastroCargo\\'
         self.contador_erros = 0
+        self.mensagem_erro = ""
 
     def screenshot(self, nome):
         screenshot = pyautogui.screenshot()
@@ -14,6 +15,7 @@ class CadastroCargo:
         return screenshot
 
     def click_on_screen(self, screenshot, area, cor_esperada, tolerancia=95):
+        limite_erros = 20
         parte_recortada = screenshot.crop(area)
         parte_recortada.save(self.caminhoScreenshot + 'temp.png') 
         imagem = cv2.imread(self.caminhoScreenshot + 'temp.png')
@@ -26,6 +28,9 @@ class CadastroCargo:
         else:
             self.contador_erros += 1 
             print("Botão não encontrado")
+            if self.contador_erros > limite_erros:
+                print("Botão não encontrado devido a lentidão. Voltando para a tela inicial e iniciando o processo novamente")
+                self.mensagem_erro = "Botão não encontrado devido a lentidão. Voltando para a tela inicial e iniciando o processo novamente"
             time.sleep(1)
             return False
 
@@ -44,30 +49,32 @@ class CadastroCargo:
         print('\nCADASTRO DE CARGO')
         tempos_tela = {}
         time.sleep(5)
-            
+        limite_erros = 20
+
 ######### VARIÁVEIS
         hoje = datetime.date.today()
         cor_branca = (254,254,254)
         cor_azul = (41,86,128)
         cor_cinza = (235,237,238)
-            
+        
         while True:
             self.contador_erros = 0
-        
+
             try:
+                self.mensagem_erro = ""
 
 ################# TELA INICIAL
                 tempo_inicial = time.time()
                 screenshot = self.screenshot('01-telaInicial.png')
                 while not self.click_on_screen(screenshot, (20, 421, 301, 463), cor_branca):  
                     screenshot = self.screenshot('01-telaInicial.png')
-                    if self.contador_erros > 20:
+                    if self.contador_erros > limite_erros:
                         self.click_on_screen(screenshot, (55,199,270,268), cor_branca)
                         break
 
-                if self.contador_erros > 20:
+                if self.contador_erros > limite_erros:
                     return
-            
+
                 tempo_tela_inicial = round(time.time() - tempo_inicial, 1)
 
 ################# BOTÃO CADASTRO CARGO
@@ -75,11 +82,11 @@ class CadastroCargo:
                 screenshot = self.screenshot('02-cadastroCargo.png')
                 while not self.click_on_screen(screenshot, (63, 579, 107, 597), cor_branca): 
                     screenshot = self.screenshot('02-cadastroCargo.png')
-                    if self.contador_erros > 20:
+                    if self.contador_erros > limite_erros:
                         self.click_on_screen(screenshot, (55,199,270,268), cor_branca)
                         break
 
-                if self.contador_erros > 20:
+                if self.contador_erros > limite_erros:
                     return
 
                 tela1_tela2 = round(time.time() - tempo_inicial, 1)
@@ -89,16 +96,16 @@ class CadastroCargo:
                 screenshot = self.screenshot('03-novoCadastro.png')
                 while not self.click_on_screen(screenshot, (1831,114,1885,154), cor_azul): 
                     screenshot = self.screenshot('03-novoCadastro.png')
-                    if self.contador_erros > 20:
+                    if self.contador_erros > limite_erros:
                         self.click_on_screen(screenshot, (55,199,270,268), cor_branca)
                         break
 
-                if self.contador_erros > 20:
+                if self.contador_erros > limite_erros:
                     return
 
                 tela2_tela3 = round(time.time() - tempo_inicial, 1)
 
-################# PREENCHE CADASTRO
+                # PREENCHE CADASTRO
                 screenshot = self.screenshot('04-telaCargo1.png')
 
                 # NOME
@@ -110,11 +117,11 @@ class CadastroCargo:
                 screenshot = self.screenshot('04-telaCargo1.png')
                 while not self.click_on_screen(screenshot, (1654, 337, 1901, 364), cor_azul): 
                     screenshot = self.screenshot('04-telaCargo1.png')
-                    if self.contador_erros > 20:
+                    if self.contador_erros > limite_erros:
                         self.click_on_screen(screenshot, (55,199,270,268), cor_branca)
                         break
 
-                if self.contador_erros > 20:
+                if self.contador_erros > limite_erros:
                     return
 
                 tela3_tela4 = round(time.time() - tempo_inicial, 1)
@@ -124,10 +131,10 @@ class CadastroCargo:
                 screenshot = self.screenshot('05-telaCargo2.png')
                 while not self.click_on_screen(screenshot, (1644, 549, 1888, 580), cor_azul):
                     screenshot = self.screenshot('05-telaCargo2.png')
-                    if self.contador_erros > 20:
+                    if self.contador_erros > limite_erros:
                         self.click_on_screen(screenshot, (55,199,270,268), cor_branca)
 
-                if self.contador_erros > 20:
+                if self.contador_erros > limite_erros:
                     return
 
                 tela4_finalizar = round(time.time() - tempo_inicial, 1)
@@ -151,7 +158,8 @@ class CadastroCargo:
 
 ############# TRATA O ERRO DE IMAGEM
             except pyautogui.ImageNotFoundException:
-                print("Imagem não encontrada, retornando para a tela inicial...")
+                print("Imagem não encontrada, retornando para a tela inicial e iniciando o processo novamente")
+                self.mensagem_erro = "Imagem não encontrada, retornando para a tela inicial e iniciando o processo novamente"
                 pyautogui.press('esc')
                 pyautogui.click(150,230)
                 time.sleep(1)

@@ -139,12 +139,14 @@ Este método é o construtor da classe. Quando um novo objeto da classe é criad
 
 **self.contador_erros:** Este atributo é inicializado com zero. Ele será usado para contar o número de erros que ocorrem durante o processo de automação.
 
+**self.mensagem_erro:** Este atributo é inicializado nulo e é usado para armazenar erros (casso ocorram) durante o processo de automação.
+
 ### Método screenshot
 
-    def screenshot(self, nome):
-        screenshot = pyautogui.screenshot()
-        screenshot.save(self.caminhoScreenshot + nome)
-        return screenshot
+    def __init__(self):
+        self.caminhoScreenshot = '.\\screenshots\\CadastroDepartamento\\'
+        self.contador_erros = 0
+        self.mensagem_erro = ""
 
 
 Este método captura uma screenshot da tela atual e a salva no diretório especificado pelo atributo ```caminhoScreenshot```. Ele recebe como parâmetro o nome do arquivo a ser salvo. Após salvar a captura de tela, retorna a própria imagem.
@@ -153,19 +155,20 @@ Este método captura uma screenshot da tela atual e a salva no diretório especi
 
     def click_on_screen(self, screenshot, area, cor_esperada, tolerancia=95):
         parte_recortada = screenshot.crop(area)
-        parte_recortada.save(self.caminhoScreenshot + 'temp.png')  # Salva a parte recortada temporariamente
+        parte_recortada.save(self.caminhoScreenshot + 'temp.png') 
         imagem = cv2.imread(self.caminhoScreenshot + 'temp.png')
-
         media_cor = imagem.mean(axis=0).mean(axis=0)
-
         if all(abs(media_cor - cor_esperada) < tolerancia):
             campo_x, campo_y = pyautogui.locateCenterOnScreen(parte_recortada)
             pyautogui.click(campo_x, campo_y)
             time.sleep(1)
             return True
         else:
-            self.contador_erros += 1  # Incrementa o contador de erros
+            self.contador_erros += 1 
             print("Botão não encontrado")
+            if self.contador_erros > 20:
+                print("Botão não encontrado devido a lentidão. Voltando para a tela inicial e iniciando o processo novamente")
+                self.mensagem_erro = "Botão não encontrado devido a lentidão. Voltando para a tela inicial e iniciando o processo novamente"
             time.sleep(1)
             return False
 
@@ -178,7 +181,7 @@ Este método é responsável por clicar em uma determinada área da tela, verifi
 
 O método começa recortando a área especificada da screenshot e a salva temporariamente em um arquivo. Em seguida, utiliza a biblioteca ```opencv-python``` para ler a imagem recortada e calcular a média das cores.
 
-Se a média das cores estiver dentro da tolerância especificada em relação à cor esperada, o método localiza o centro da área na tela e realiza um clique usando ```pyautogui.click```. Caso contrário, incrementa o contador de erros e exibe uma mensagem de erro.
+Se a média das cores estiver dentro da tolerância especificada em relação à cor esperada, o método localiza o centro da área na tela e realiza um clique usando ```pyautogui.click```. Caso contrário, incrementa o contador de erros e exibe uma mensagem de erro. Se o número de erros exceder 20, uma mensagem será exibida usando  ```print``` indicando que o botão não foi encontrado devido à lentidão, e armazenada em uma variável por meio do parâmetro ```self.mensagem_erro```.
 
 
 

@@ -1,10 +1,24 @@
 # Notas de Versão - Projeto de Automação
 
-## [Versão 1.1.0] - 2024-06-11
+
+## [Versão 1.2.0] - 2024-06-12
 
 **Adicionado**
-- Implementação de medição de tempo de execução para cada etapa do processo de cadastro.
-- Armazenamento dos tempos de cada tela em um dicionário.
+- Adição da variável ```self.mensagem_erro``` que armazena erros de imagem e de botão não encontrado
+- Adição da variável ```limite_erros``` que define o limite de segundos para clicar nos botões
+
+**Alterado**
+- Foram substituídos os valores fiuxos de limite de tempo pela variável ```limite_erros```
+
+**Removido**
+- N/A
+
+
+## [Versão 1.1.0] - 2024-06-12
+
+**Adicionado**
+- Implementação de medição de tempo de execução usando ```time.time()``` para cada etapa do processo de cadastro.
+- Armazenamento dos tempos de cada tela no dicionário ```tempos_tela = {}```.
 - Impressão dos tempos de execução ao final do processo de cadastro.
 
 **Alterado**
@@ -29,7 +43,6 @@
 
 **Adicionado**
 - Implementação de validação de cor para garantir a precisão do clique em botões.
-- Remoção de pausas com `time.sleep` após os cliques em botões.
 - Incremento do contador de erros para monitorar tentativas de clique mal sucedidas.
 - Loop de tentativas de clique em botões até que a cor esperada seja encontrada.
 - Adição de variáveis de cores para as cores esperadas dos botões.
