@@ -1,5 +1,19 @@
 # Notas de Versão - Projeto de Automação
 
+## [Versão 1.1.0] - 2024-06-11
+
+**Adicionado**
+- Implementação de medição de tempo de execução para cada etapa do processo de cadastro.
+- Armazenamento dos tempos de cada tela em um dicionário.
+- Impressão dos tempos de execução ao final do processo de cadastro.
+
+**Alterado**
+- A lógica de cliques em botões foi ajustada para incluir a medição de tempo entre as telas e a impressão dos tempos de execução.
+
+**Removido**
+- N/A
+
+
 ## [Versão 1.0.1] - 2024-06-10
 
 **Adicionado**

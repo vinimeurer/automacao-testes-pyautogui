@@ -1,0 +1,6 @@
+main.dart.js:83916 https://webapiponto.tecnopontonuvem.com:8899/funcionario_/1
+main.dart.js:83916 Salvou o(s) registroFuncionario(s)
+2main.dart.js:83916 ver aqui no objeto func: 76776607000120
+main.dart.js:83916 Salvou o(s) horario(s)
+main.dart.js:83916 Salvou o(s) Cargo(s)
+main.dart.js:83916 Salvou o(s) Departamento(s)

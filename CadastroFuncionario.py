@@ -16,85 +16,95 @@ class CadastroFuncionario:
 
     def click_on_screen(self, screenshot, area, cor_esperada, tolerancia=95):
         parte_recortada = screenshot.crop(area)
-        parte_recortada.save(self.caminhoScreenshot + 'temp.png')  # Salva a parte recortada temporariamente
+        parte_recortada.save(self.caminhoScreenshot + 'temp.png')
         imagem = cv2.imread(self.caminhoScreenshot + 'temp.png')
 
-        # Calcula a média das cores em toda a região recortada
         media_cor = imagem.mean(axis=0).mean(axis=0)
 
-        # Verifica se a média da cor está dentro da tolerância especificada
         if all(abs(media_cor - cor_esperada) < tolerancia):
             campo_x, campo_y = pyautogui.locateCenterOnScreen(parte_recortada)
             pyautogui.click(campo_x, campo_y)
             time.sleep(1)
             return True
         else:
-            self.contador_erros += 1  # Incrementa o contador de erros
+            self.contador_erros += 1 
             print("Botão não encontrado")
             time.sleep(1)
             return False
-        
-    def move_cursor(self, screenshot, area):
-        parte_recortada = screenshot.crop(area)
-        campo_x, campo_y = pyautogui.locateCenterOnScreen(parte_recortada)
-        pyautogui.moveTo(campo_x, campo_y)  
 
     def preenche_cadastro(self, screenshot, area, texto):
         parte_recortada = screenshot.crop(area)
         campo_x, campo_y = pyautogui.locateCenterOnScreen(parte_recortada)
         pyautogui.click(campo_x, campo_y)
         pyautogui.write(texto)
+        
+    def move_cursor(self, screenshot, area):
+        parte_recortada = screenshot.crop(area)
+        campo_x, campo_y = pyautogui.locateCenterOnScreen(parte_recortada)
+        pyautogui.moveTo(campo_x, campo_y)  
 
     def run(self):
+        print('\nCADASTRO DE FUNCIONÁRIO')
         time.sleep(5)
+        tempos_tela = {}
         
-        # VARIÁVEIS FIXAS
+######### VARIÁVEIS FIXAS
         hoje = datetime.date.today()
         cor_branca = (254,254,254)
         cor_azul = (41,86,128)
         cor_cinza = (235,237,238)
 
         while True:
-            # Reinicia o contador de erros a cada iteração
+
             self.contador_erros = 0
             
             try:
 
-                # TELA INICIAL
+################# TELA INICIAL
+                tempo_inicial = time.time()
                 screenshot = self.screenshot('01-telaInicial.png')
                 while not self.click_on_screen(screenshot, (20,421,301,463), cor_branca):
                     screenshot = self.screenshot('01-telaInicial.png')
                     if self.contador_erros > 20:
-                        self.click_on_screen(screenshot, (55,199,270,268), cor_branca)  # Clica na tela inicial
+                        self.click_on_screen(screenshot, (55,199,270,268), cor_branca)
                         break
 
                 if self.contador_erros > 20:
-                    continue  # Reinicia o processo se o contador de erros exceder 20
+                    continue
+                
+                
+                tempo_tela_inicial = round(time.time() - tempo_inicial, 1)
 
-                # BOTÃO CADASTRO EMPRESA
+################# BOTÃO CADASTRO EMPRESA
+                tempo_inicial = time.time()
                 screenshot = self.screenshot('02-cadastroFuncionario.png')
                 while not self.click_on_screen(screenshot, (58,544,143,563), cor_branca):
                     screenshot = self.screenshot('02-cadastroFuncionario.png')
                     if self.contador_erros > 20:
-                        self.click_on_screen(screenshot, (55,199,270,268), cor_branca)  # Clica na tela inicial
+                        self.click_on_screen(screenshot, (55,199,270,268), cor_branca)
                         break
 
                 if self.contador_erros > 20:
-                    continue  # Reinicia o processo se o contador de erros exceder 20
+                    continue
+                
+                tela1_tela2 = round(time.time() - tempo_inicial, 1)
 
-                # INCLUIR NOVO CADASTRO
+################# INCLUIR NOVO CADASTRO
+                tempo_inicial = time.time()
                 screenshot = self.screenshot('03-novoCadastro.png')
-                # self.move_cursor (screenshot, (1890,122,1909,146))
                 while not self.click_on_screen(screenshot, (1880,110,1910,150), cor_azul):
                     screenshot = self.screenshot('03-novoCadastro.png')
                     if self.contador_erros > 20:
-                        self.click_on_screen(screenshot, (55,199,270,268), cor_branca)  # Clica na tela inicial
+                        self.click_on_screen(screenshot, (55,199,270,268), cor_branca)
                         break
 
                 if self.contador_erros > 20:
-                    continue  # Reinicia o processo se o contador de erros exceder 20
+                    continue
+                
+                tela2_tela3 = round(time.time() - tempo_inicial, 1)
 
-                # PREENCHE CADASTRO
+################# PREENCHE CADASTRO
+                tempo_inicial = time.time()
                 screenshot = self.screenshot('04-telaFuncionario1.png')
                 while not self.click_on_screen( screenshot, (369,182,527,214), cor_azul):
                     screenshot = self.screenshot('04-telaFuncionario1.png')
@@ -146,9 +156,12 @@ class CadastroFuncionario:
                 self.preenche_cadastro(screenshot, (1128,606,1323,644), matricula)
                 time.sleep(1)
                 
-                # SCROLL PARA O FINAL DA TELA
-                pyautogui.scroll(-5000)
+                tela3_tela4 = round(time.time() - tempo_inicial, 1)
                 
+################# SCROLL PARA O FINAL DA TELA
+                pyautogui.scroll(-5000)
+                tempo_inicial = time.time()     
+                       
                 # VINCULA HORARIO
                 pesquisa = hoje.strftime('%d/%m/%Y')
                 screenshot = self.screenshot('07-telaFuncionario2.png')
@@ -220,19 +233,31 @@ class CadastroFuncionario:
                 while not self.click_on_screen(screenshot, (1291,640,1538,678), cor_azul):
                     screenshot = self.screenshot('07-telaFuncionario2.png')
 
-                # FINALIZA O CADASTRO
+################# FINALIZA O CADASTRO
                 screenshot = self.screenshot('11-finalizaFuncionario.png')
                 while not self.click_on_screen(screenshot, (1302,843,1522,870), cor_azul):
                     screenshot = self.screenshot('11-finalizaFuncionario.png')
                 
-                time.sleep(5)
+                tela4_finalizar = round(time.time() - tempo_inicial, 1)
                 
-                # VOLTA PARA TELA INICIAL 
+################# VOLTA PARA TELA INICIAL 
+                time.sleep(10)
                 self.click_on_screen(screenshot, (55,199,270,268), cor_branca)
                 time.sleep(0.5)
                 self.click_on_screen(screenshot, (55,199,270,268), cor_branca)
+
+################# EXIBE OS TEMPOS
+                tempos_tela['tempo entre tela 1 e tela 2'] = tela1_tela2
+                tempos_tela['tempo entre tela 2 e tela 3'] = tela2_tela3
+                tempos_tela['tempo entre tela 3 e tela 4'] = tela3_tela4
+                tempos_tela['tempo entre tela 4 e finalizar'] = tela4_finalizar
+                
+                for chave, valor in tempos_tela.items():
+                    print(f"{chave}: {valor} segundos")
+                    
                 break
             
+############# TRATA O ERRO DE IMAGEM           
             except pyautogui.ImageNotFoundException:
                 print("Imagem não encontrada, retornando para a tela inicial...")
                 self.click_on_screen(screenshot, (55,199,270,268), cor_branca)

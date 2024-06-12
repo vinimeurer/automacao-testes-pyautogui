@@ -1,0 +1,7 @@
+main.dart.js:83916 Cadastrar - Salvou o Horario:241
+main.dart.js:83916 Cadastrar - Salvou o CargaHoraria:237
+main.dart.js:83916 Cadastrar - Salvou o Política:113
+main.dart.js:83916 updateHorario - retorno - 200
+main.dart.js:83916 Horario updated!
+main.dart.js:83916 Editar - Salvou o Horario:241
+main.dart.js:83916 Cadastrar - Salvou o PoliticaHorario:114
