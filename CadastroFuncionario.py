@@ -17,26 +17,31 @@ class CadastroFuncionario:
         return screenshot
 
     def click_on_screen(self, screenshot, area, cor_esperada, tolerancia=95):
+        limite_erros = 20
         parte_recortada = screenshot.crop(area)
-        parte_recortada.save(self.caminhoScreenshot + 'temp.png')
+        parte_recortada.save(self.caminhoScreenshot + 'temp.png') 
         imagem = cv2.imread(self.caminhoScreenshot + 'temp.png')
-
         media_cor = imagem.mean(axis=0).mean(axis=0)
-
         if all(abs(media_cor - cor_esperada) < tolerancia):
             campo_x, campo_y = pyautogui.locateCenterOnScreen(parte_recortada)
             pyautogui.click(campo_x, campo_y)
-            if self.contador_erros > 20:
-                print("Botão não encontrado devido a lentidão. Voltando para a tela inicial e iniciando o processo novamente")
-                self.mensagem_erro = "Botão não encontrado devido a lentidão. Voltando para a tela inicial e iniciando o processo novamente"
             time.sleep(1)
             return True
         else:
             self.contador_erros += 1 
             print("Botão não encontrado")
+            if self.contador_erros > limite_erros:
+                print("Botão não encontrado devido a lentidão. Voltando para a tela inicial e iniciando o processo novamente")
+                self.mensagem_erro = "Botão não encontrado devido a lentidão. Voltando para a tela inicial e iniciando o processo novamente"
+                pyautogui.press('esc')
+                pyautogui.click(150,230)
+                time.sleep(1)
+                pyautogui.click(150,230)
+                time.sleep(1)
+                return False
             time.sleep(1)
             return False
-
+        
     def preenche_cadastro(self, screenshot, area, texto):
         parte_recortada = screenshot.crop(area)
         campo_x, campo_y = pyautogui.locateCenterOnScreen(parte_recortada)

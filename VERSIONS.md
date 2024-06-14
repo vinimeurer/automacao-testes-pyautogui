@@ -1,5 +1,17 @@
 # Notas de Versão - Projeto de Automação
 
+## [Versão 1.2.1] - 2024-06-14
+
+**Adicionado**
+- Correção de um bug relacinado ao loop em caso de lentidão
+
+**Alterado**
+- Foi alterada a lógica de cliques na função `click_on_screen` devido a um erro que estava ocorrendo
+
+**Removido**
+- N/A
+
+
 
 ## [Versão 1.2.0] - 2024-06-12
 
@@ -12,6 +24,7 @@
 
 **Removido**
 - N/A
+
 
 
 ## [Versão 1.1.0] - 2024-06-12
@@ -28,22 +41,25 @@
 - N/A
 
 
+
 ## [Versão 1.0.1] - 2024-06-10
 
 **Adicionado**
 - Correção de um bug no direcionamento de imagens 
 
 **Alterado**
-- N/A
+- foi alterado o `self.caminhoScreenshot` o método `__init__` devido a um mal direcionamento de capturas de tela
+
 **Removido**
 - N/A
+
 
 
 ## [Versão 1.0.0] - 2024-06-10
 
 **Adicionado**
-- Implementação de validação de cor para garantir a precisão do clique em botões.
-- Incremento do contador de erros para monitorar tentativas de clique mal sucedidas.
+- Implementação de validação de cor no método `click_on_screen` para garantir a precisão do clique em botões.
+- Incremento do contador de erros `self.contador_erros` no método `__init__` para monitorar tentativas de clique mal sucedidas.
 - Loop de tentativas de clique em botões até que a cor esperada seja encontrada.
 - Adição de variáveis de cores para as cores esperadas dos botões.
 - Lógica para retornar à tela inicial em caso de falha na localização dos botões.
@@ -54,6 +70,8 @@
 
 **Removido**
 - Pausas fixas com `time.sleep` após os cliques em botões.
+
+
 
 ## [Versão 0.1.0] - 2024-05-30
 

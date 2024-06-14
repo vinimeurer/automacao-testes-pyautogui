@@ -31,6 +31,12 @@ class CadastroCargo:
             if self.contador_erros > limite_erros:
                 print("Botão não encontrado devido a lentidão. Voltando para a tela inicial e iniciando o processo novamente")
                 self.mensagem_erro = "Botão não encontrado devido a lentidão. Voltando para a tela inicial e iniciando o processo novamente"
+                pyautogui.press('esc')
+                pyautogui.click(150,230)
+                time.sleep(1)
+                pyautogui.click(150,230)
+                time.sleep(1)
+                return False
             time.sleep(1)
             return False
 
@@ -73,7 +79,7 @@ class CadastroCargo:
                         break
 
                 if self.contador_erros > limite_erros:
-                    return
+                    continue
 
                 tempo_tela_inicial = round(time.time() - tempo_inicial, 1)
 
@@ -87,7 +93,7 @@ class CadastroCargo:
                         break
 
                 if self.contador_erros > limite_erros:
-                    return
+                    continue
 
                 tela1_tela2 = round(time.time() - tempo_inicial, 1)
 
@@ -101,7 +107,7 @@ class CadastroCargo:
                         break
 
                 if self.contador_erros > limite_erros:
-                    return
+                    continue
 
                 tela2_tela3 = round(time.time() - tempo_inicial, 1)
 
@@ -122,7 +128,7 @@ class CadastroCargo:
                         break
 
                 if self.contador_erros > limite_erros:
-                    return
+                    continue
 
                 tela3_tela4 = round(time.time() - tempo_inicial, 1)
 
@@ -135,7 +141,7 @@ class CadastroCargo:
                         self.click_on_screen(screenshot, (55,199,270,268), cor_branca)
 
                 if self.contador_erros > limite_erros:
-                    return
+                    continue
 
                 tela4_finalizar = round(time.time() - tempo_inicial, 1)
 
